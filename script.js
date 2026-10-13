@@ -4,12 +4,43 @@ if (!reducedMotion && "IntersectionObserver" in window) {
     const revealTargets = document.querySelectorAll(
         ".hero-content, .content-section > .eyebrow, .content-section > h2, .content-section .info-card, .career-copy, .career-section .cta-buttons, .contact-heading, .contact-intro, .contact-form"
     );
+    let lastScrollY = window.scrollY;
+    let scrollDirection = null;
+    const exitedSide = new WeakMap();
+
+    window.addEventListener("scroll", () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY !== lastScrollY) {
+            scrollDirection = currentScrollY > lastScrollY ? "down" : "up";
+            lastScrollY = currentScrollY;
+        }
+    }, { passive: true });
 
     revealTargets.forEach((target) => target.classList.add("reveal-item"));
 
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            entry.target.classList.toggle("is-visible", entry.isIntersecting);
+            const top = entry.rootBounds?.top ?? 0;
+            const bottom = entry.rootBounds?.bottom ?? window.innerHeight;
+
+            if (entry.isIntersecting) {
+                const side = exitedSide.get(entry.target);
+                if (!side || (scrollDirection === "down" && side === "bottom")
+                    || (scrollDirection === "up" && side === "top")) {
+                    entry.target.classList.add("is-visible");
+                    exitedSide.delete(entry.target);
+                }
+            } else if (entry.boundingClientRect.bottom <= top) {
+                exitedSide.set(entry.target, "top");
+                if (scrollDirection === "down") {
+                    entry.target.classList.remove("is-visible");
+                }
+            } else if (entry.boundingClientRect.top >= bottom) {
+                exitedSide.set(entry.target, "bottom");
+                if (scrollDirection === "up") {
+                    entry.target.classList.remove("is-visible");
+                }
+            }
         });
     }, {
         threshold: 0.12,
