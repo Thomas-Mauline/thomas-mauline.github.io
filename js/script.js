@@ -1,5 +1,138 @@
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const binaryBackground = document.querySelector(".binary-background");
+
+if (binaryBackground instanceof HTMLCanvasElement) {
+    const context = binaryBackground.getContext("2d");
+
+    if (context) {
+        const cellWidth = 24;
+        const cellHeight = 30;
+        const glyphs = [];
+        const ripples = [];
+        let canvasWidth = 0;
+        let canvasHeight = 0;
+        let animationFrame = 0;
+        let lastFrameTime = 0;
+
+        const resizeCanvas = () => {
+            if (animationFrame) {
+                window.cancelAnimationFrame(animationFrame);
+            }
+            animationFrame = 0;
+            lastFrameTime = 0;
+
+            const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+            canvasWidth = window.innerWidth;
+            canvasHeight = window.innerHeight;
+            binaryBackground.width = Math.round(canvasWidth * pixelRatio);
+            binaryBackground.height = Math.round(canvasHeight * pixelRatio);
+            context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+            glyphs.length = 0;
+
+            const columns = Math.ceil(canvasWidth / cellWidth);
+            const rows = Math.ceil(canvasHeight / cellHeight);
+            for (let row = 0; row <= rows; row += 1) {
+                for (let column = 0; column <= columns; column += 1) {
+                    glyphs.push({
+                        x: column * cellWidth + cellWidth / 2,
+                        y: row * cellHeight + cellHeight / 2,
+                        value: Math.random() < 0.5 ? "0" : "1"
+                    });
+                }
+            }
+
+            drawFrame();
+        };
+
+        const drawFrame = (time = 0) => {
+            context.clearRect(0, 0, canvasWidth, canvasHeight);
+            context.font = '12px "SFMono-Regular", Consolas, monospace';
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+
+            for (const glyph of glyphs) {
+                let glow = 0;
+
+                for (const ripple of ripples) {
+                    const dx = glyph.x - ripple.x;
+                    const dy = glyph.y - ripple.y;
+                    const distance = Math.hypot(dx, dy);
+                    const angle = Math.atan2(dy, dx);
+                    const shape = 1
+                        + ripple.roughness * Math.sin(angle * ripple.lobes + ripple.phase)
+                        + ripple.roughness * 0.45 * Math.sin(angle * (ripple.lobes + 2) - ripple.phase * 1.7);
+                    const distanceFromWave = ripple.radius - distance * shape;
+
+                    if (distanceFromWave >= -12 && distanceFromWave <= 105) {
+                        const front = Math.exp(-(((distanceFromWave - 1) / 16) ** 2));
+                        const trail = distanceFromWave > 0 ? Math.exp(-distanceFromWave / 42) * 0.45 : 0;
+                        glow = Math.max(glow, front, trail);
+                    }
+                }
+
+                if (glow <= 0.04) {
+                    continue;
+                }
+
+                context.fillStyle = `rgba(147, 220, 255, ${0.18 + glow * 0.8})`;
+                context.shadowColor = "rgba(56, 189, 248, 0.9)";
+                context.shadowBlur = glow * 9;
+                context.fillText(glyph.value, glyph.x, glyph.y);
+            }
+
+            context.shadowBlur = 0;
+
+            if (ripples.length) {
+                const elapsed = lastFrameTime ? Math.min(time - lastFrameTime, 40) : 16;
+                lastFrameTime = time;
+
+                for (let index = ripples.length - 1; index >= 0; index -= 1) {
+                    const ripple = ripples[index];
+                    ripple.radius += elapsed * ripple.speed;
+                    if (ripple.radius > ripple.maxRadius + 110) {
+                        ripples.splice(index, 1);
+                    }
+                }
+
+                if (ripples.length) {
+                    animationFrame = window.requestAnimationFrame(drawFrame);
+                } else {
+                    animationFrame = 0;
+                    lastFrameTime = 0;
+                    drawFrame();
+                }
+            }
+        };
+
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas, { passive: true });
+
+        if (!reducedMotion) {
+            document.addEventListener("click", (event) => {
+                const maxRadius = Math.hypot(canvasWidth, canvasHeight);
+                ripples.push({
+                    x: event.clientX,
+                    y: event.clientY,
+                    radius: 0,
+                    maxRadius,
+                    speed: 0.72,
+                    lobes: 3 + Math.floor(Math.random() * 4),
+                    roughness: 0.08 + Math.random() * 0.08,
+                    phase: Math.random() * Math.PI * 2
+                });
+
+                if (ripples.length > 5) {
+                    ripples.shift();
+                }
+                if (!animationFrame) {
+                    animationFrame = window.requestAnimationFrame(drawFrame);
+                }
+            });
+        }
+    }
+}
+
 if (!reducedMotion && "IntersectionObserver" in window) {
     const revealTargets = document.querySelectorAll(
         ".hero-content, .content-section > .eyebrow, .content-section > h2, .content-section .info-card, .career-copy, .career-section .cta-buttons, .contact-heading, .contact-intro, .contact-form"
@@ -53,6 +186,7 @@ if (!reducedMotion && "IntersectionObserver" in window) {
 const navWindow = document.querySelector(".nav-window");
 const navLinks = [...document.querySelectorAll(".nav-links a")];
 const navSections = navLinks
+    .filter((link) => link.getAttribute("href")?.startsWith("#"))
     .map((link) => document.querySelector(link.getAttribute("href")))
     .filter((section) => section instanceof HTMLElement);
 const header = document.querySelector("header");
@@ -60,6 +194,7 @@ const header = document.querySelector("header");
 if (navWindow && navLinks.length && navSections.length && header) {
     const navToggle = header.querySelector(".nav-toggle");
     const desktopNavigation = window.matchMedia("(min-width: 901px) and (hover: hover) and (pointer: fine)");
+    const isEnglish = document.documentElement.lang === "en";
     let activeSection = null;
     let navFrame = 0;
     let pendingSection = null;
@@ -69,7 +204,9 @@ if (navWindow && navLinks.length && navSections.length && header) {
     const setMenuOpen = (isOpen) => {
         header.classList.toggle("is-menu-open", isOpen);
         navToggle?.setAttribute("aria-expanded", String(isOpen));
-        navToggle?.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+        navToggle?.setAttribute("aria-label", isEnglish
+            ? (isOpen ? "Close menu" : "Open menu")
+            : (isOpen ? "Fermer le menu" : "Ouvrir le menu"));
     };
 
     const centerNavLink = (link) => {
@@ -198,7 +335,8 @@ if (navWindow && navLinks.length && navSections.length && header) {
     navLinks.forEach((link) => {
         link.addEventListener("focus", () => centerNavLink(link));
         link.addEventListener("click", (event) => {
-            const section = document.querySelector(link.getAttribute("href"));
+            const href = link.getAttribute("href");
+            const section = href?.startsWith("#") ? document.querySelector(href) : null;
             if (section instanceof HTMLElement) {
                 event.preventDefault();
                 pendingSection = section;
@@ -239,26 +377,44 @@ if (navWindow && navLinks.length && navSections.length && header) {
     scheduleNavUpdate();
 }
 
+document.addEventListener("contextmenu", (event) => {
+    if (event.target instanceof HTMLImageElement) {
+        event.preventDefault();
+    }
+});
+
+document.addEventListener("dragstart", (event) => {
+    if (event.target instanceof HTMLImageElement) {
+        event.preventDefault();
+    }
+});
+
 const contactForm = document.querySelector("#contact-form");
 const contactFormNote = document.querySelector("#contact-form-note");
 
 if (contactForm instanceof HTMLFormElement && contactFormNote instanceof HTMLElement) {
     contactForm.addEventListener("submit", (event) => {
         event.preventDefault();
+        const isEnglish = document.documentElement.lang === "en";
         const formData = new FormData(contactForm);
         const name = String(formData.get("name") ?? "").trim();
         const email = String(formData.get("email") ?? "").trim();
         const subject = String(formData.get("subject") ?? "").trim();
         const message = String(formData.get("message") ?? "").trim();
         if (!name || !email || !subject || !message) {
-            contactFormNote.textContent = "Merci de remplir tous les champs avant de préparer le message.";
+            contactFormNote.textContent = isEnglish
+                ? "Please complete every field before preparing your message."
+                : "Merci de remplir tous les champs avant de préparer le message.";
             return;
         }
 
-        const body = `Bonjour Thomas,\n\n${message}\n\n— ${name}\n${email}`;
+        const greeting = isEnglish ? "Hello Thomas," : "Bonjour Thomas,";
+        const body = `${greeting}\n\n${message}\n\n— ${name}\n${email}`;
         const mailto = `mailto:thomas.mauline@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-        contactFormNote.textContent = "Ton application e-mail va s’ouvrir avec ton message prêt à être envoyé.";
+        contactFormNote.textContent = isEnglish
+            ? "Your email app will open with your message ready to send."
+            : "Ton application e-mail va s’ouvrir avec ton message prêt à être envoyé.";
         window.location.href = mailto;
     });
 }

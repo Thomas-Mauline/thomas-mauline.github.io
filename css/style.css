@@ -17,6 +17,26 @@ body {
     cursor: auto;
 }
 
+.binary-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+main,
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+img {
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 7rem;
@@ -224,6 +244,30 @@ html {
 
 .nav-links a[aria-current="location"] .nav-index {
     color: #7dd3fc;
+}
+
+.language-switch {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.45rem 0.72rem;
+    border: 1px solid rgba(125, 211, 252, 0.28);
+    border-radius: 0.8rem;
+    color: #7dd3fc;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: color 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+}
+
+.language-switch:hover,
+.language-switch:focus-visible {
+    border-color: rgba(125, 211, 252, 0.65);
+    background: rgba(56, 189, 248, 0.12);
+    color: #e0f2fe;
 }
 
 /* --- SECTION ACCUEIL (HERO) --- */
@@ -1143,6 +1187,10 @@ footer a {
 
     .logo {
         align-self: flex-start;
+    }
+
+    .nav-toggle {
+        margin-left: auto;
     }
 
     .nav-toggle {
