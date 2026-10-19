@@ -1,0 +1,190 @@
+.github-projects {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.github-projects > .eyebrow {
+    margin-bottom: 0.35rem;
+}
+
+.github-projects h3 {
+    margin-bottom: 0.5rem;
+    color: #f8fafc;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    letter-spacing: -0.025em;
+}
+
+.github-projects-intro {
+    max-width: 48rem;
+    margin-bottom: 1.25rem;
+    color: #94a3b8;
+}
+
+.github-project-carousel {
+    overflow: hidden;
+    overscroll-behavior-x: contain;
+    touch-action: pan-y;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.github-project-carousel:active {
+    cursor: grabbing;
+}
+
+.github-project-track {
+    display: flex;
+    width: max-content;
+    gap: 1rem;
+    padding: 0.35rem 0 1rem;
+    will-change: transform;
+}
+
+.github-project-scrollbar {
+    position: relative;
+    height: 0.9rem;
+    margin-top: -0.35rem;
+    touch-action: none;
+    cursor: grab;
+}
+
+.github-project-scrollbar:active {
+    cursor: grabbing;
+}
+
+.github-project-scrollbar-thumb {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 0.3rem;
+    min-width: 2rem;
+    border-radius: 999px;
+    background: rgba(125, 211, 252, 0.55);
+    transform: translate3d(0, -50%, 0);
+    transition: background-color 0.15s ease;
+}
+
+.github-project-scrollbar:hover .github-project-scrollbar-thumb,
+.github-project-scrollbar:focus-visible .github-project-scrollbar-thumb {
+    background: #7dd3fc;
+}
+
+.github-project-card {
+    display: flex;
+    width: clamp(17rem, 30vw, 23rem);
+    min-height: 100%;
+    overflow: hidden;
+    flex-direction: column;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 1rem;
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.94), rgba(15, 23, 42, 0.96));
+    color: #e2e8f0;
+    box-shadow: 0 14px 35px rgba(2, 6, 23, 0.2);
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.github-project-card:hover {
+    border-color: rgba(56, 189, 248, 0.55);
+    box-shadow: 0 18px 38px rgba(2, 6, 23, 0.3), 0 0 20px rgba(56, 189, 248, 0.08);
+    transform: translateY(-3px);
+}
+
+.github-project-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1200 / 630;
+    background: rgba(15, 23, 42, 0.8);
+    object-fit: cover;
+}
+
+.github-project-copy {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1rem 1.1rem 1.15rem;
+}
+
+.github-project-copy h4 {
+    overflow-wrap: anywhere;
+    margin-bottom: 0.55rem;
+    color: #f8fafc;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.github-project-copy h4 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.github-project-copy h4 a:hover,
+.github-project-copy h4 a:focus-visible {
+    color: #7dd3fc;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.github-project-date {
+    margin-bottom: 0.7rem;
+    color: #7dd3fc;
+    font-size: 0.82rem;
+}
+
+.github-project-excerpt {
+    display: -webkit-box;
+    overflow: hidden;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
+
+.github-project-status {
+    min-height: 1.5rem;
+    margin-top: 0.2rem;
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+.github-project-retry {
+    margin-top: 0.25rem;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid rgba(125, 211, 252, 0.4);
+    border-radius: 0.65rem;
+    background: rgba(56, 189, 248, 0.1);
+    color: #dff5ff;
+    cursor: pointer;
+}
+
+.github-project-retry:hover {
+    background: rgba(56, 189, 248, 0.18);
+}
+
+.github-project-retry[hidden] {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .github-projects {
+        margin-top: 2.4rem;
+        padding-top: 1.5rem;
+    }
+
+    .github-project-card {
+        width: min(82vw, 21rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .github-project-carousel {
+        scroll-behavior: auto;
+    }
+
+    .github-project-card,
+    .github-project-scrollbar-thumb {
+        transition: none;
+    }
+}
