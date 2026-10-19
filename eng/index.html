@@ -7,6 +7,7 @@
     <title>Thomas Mauline | Portfolio</title>
     <link rel="icon" href="../img/icon.png?v=2" type="image/png">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/github-projects.css">
 </head>
 <body>
     <canvas class="binary-background" aria-hidden="true"></canvas>
@@ -104,6 +105,19 @@
                     <p class="tag-list"><span>Active Directory</span><span>VLANs</span><span>Virtual machines</span><span>Docker</span><span>Elastic</span></p>
                 </article>
             </div>
+            <section class="github-projects" data-github-projects data-github-user="WebyPanda" aria-labelledby="github-projects-title">
+                <p class="eyebrow">Personal & academic projects</p>
+                <h3 id="github-projects-title">My GitHub projects</h3>
+                <p class="github-projects-intro">Browse my personal and academic projects on GitHub below.</p>
+                <div class="github-project-carousel" data-project-carousel aria-label="GitHub projects carousel">
+                    <div class="github-project-track" id="github-project-track" data-project-track aria-live="off"></div>
+                </div>
+                <div class="github-project-scrollbar" data-project-scrollbar role="scrollbar" aria-label="Scroll through GitHub projects" aria-controls="github-project-track" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" tabindex="0">
+                    <span class="github-project-scrollbar-thumb" data-project-scrollbar-thumb></span>
+                </div>
+                <p class="github-project-status" data-project-status role="status" aria-live="polite">Loading GitHub projects…</p>
+                <button class="github-project-retry" data-project-retry type="button" hidden>Retry</button>
+            </section>
         </section>
 
         <section id="mobility" class="content-section">
@@ -270,5 +284,6 @@
         <span class="cursor-target-frame"></span>
     </div>
     <script src="../js/script.js" defer></script>
+    <script src="../js/github-projects.js" defer></script>
 </body>
 </html>

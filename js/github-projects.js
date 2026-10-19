@@ -1,6 +1,36 @@
 const projectSection = document.querySelector("[data-github-projects]");
 
 if (projectSection instanceof HTMLElement) {
+    const isFrench = document.documentElement.lang.toLowerCase().startsWith("fr");
+    const text = isFrench
+        ? {
+            loading: "Chargement des projets GitHub…",
+            empty: "Aucun dépôt public n’a été trouvé pour ce profil.",
+            networkError: "Impossible de charger les projets GitHub. Vérifie ta connexion puis réessaie.",
+            retry: "Réessayer",
+            dateLocale: "fr-FR",
+            updatedOn: "Mis à jour le",
+            imageAlt: (name) => `Aperçu social du projet ${name}`,
+            noDescription: "Aucune description disponible.",
+            noReadme: "Aucun aperçu README disponible.",
+            loaded: (count) => `${count} projets chargés depuis le profil GitHub WebyPanda.`,
+            fallbackReadmes: (count) => `Aucun README français spécifique n’a été trouvé pour ${count} dépôt${count > 1 ? "s" : ""} ; le README principal est affiché.`,
+            unavailableReadmes: (count) => `Le README de ${count} dépôt${count > 1 ? "s" : ""} n’a pas pu être récupéré.`
+        }
+        : {
+            loading: "Loading GitHub projects…",
+            empty: "No public repositories were found for this profile.",
+            networkError: "Unable to load GitHub projects. Check your connection and try again.",
+            retry: "Retry",
+            dateLocale: "en-GB",
+            updatedOn: "Updated on",
+            imageAlt: (name) => `Social preview for ${name}`,
+            noDescription: "No description available.",
+            noReadme: "No README preview available.",
+            loaded: (count) => `${count} projects loaded from the WebyPanda GitHub profile.`,
+            fallbackReadmes: (count) => `No dedicated English README was found for ${count} ${count === 1 ? "repository" : "repositories"}; the default README is shown.`,
+            unavailableReadmes: (count) => `The README could not be retrieved for ${count} ${count === 1 ? "repository" : "repositories"}.`
+        };
     const githubUser = projectSection.dataset.githubUser;
     const carousel = projectSection.querySelector("[data-project-carousel]");
     const track = projectSection.querySelector("[data-project-track]");
@@ -20,6 +50,12 @@ if (projectSection instanceof HTMLElement) {
         && retryButton instanceof HTMLButtonElement
     ) {
         const githubHeaders = { Accept: "application/vnd.github+json" };
+        const knownSocialPreviews = {
+            "WebyPanda/Projet-Descente-Gradient-et-DeepLearning": "https://repository-images.githubusercontent.com/1145205317/a214589d-bec5-4d5f-86f8-f95fa17cd2cb",
+            "WebyPanda/Jeu-du-Memory": "https://repository-images.githubusercontent.com/1209187565/da54c6dd-5b6d-497a-b453-0d45c615d049",
+            "WebyPanda/Algorithme-Dijkstra-Chemin-le-plus-court": "https://repository-images.githubusercontent.com/1214983183/0e71d1c8-96cf-4e7b-b80a-7fae0c860add",
+            "WebyPanda/SuperTower": "https://repository-images.githubusercontent.com/1425394174/42d19231-197b-4853-926c-1b9180511586"
+        };
         const resumeDelay = 5_000;
         const speed = 24;
         const endpointPause = 1_200;
@@ -34,6 +70,20 @@ if (projectSection instanceof HTMLElement) {
         let suppressClick = false;
 
         const getReadme = async (repository) => {
+            const readmePaths = isFrench ? ["README.md"] : ["README.en.md", "README.md"];
+            for (const [index, path] of readmePaths.entries()) {
+                const response = await fetch(
+                    `https://raw.githubusercontent.com/${repository.full_name}/${encodeURIComponent(repository.default_branch)}/${path}`,
+                    { cache: "no-store" }
+                );
+                if (response.ok) {
+                    return { content: await response.text(), localized: isFrench || index === 0 };
+                }
+                if (response.status !== 404) {
+                    throw new Error(`README indisponible (${response.status})`);
+                }
+            }
+
             const response = await fetch(
                 `https://api.github.com/repos/${repository.full_name}/readme`,
                 { headers: { Accept: "application/vnd.github.raw+json" } }
@@ -41,32 +91,64 @@ if (projectSection instanceof HTMLElement) {
             if (!response.ok) {
                 throw new Error(`README indisponible (${response.status})`);
             }
-            return response.text();
+            return { content: await response.text(), localized: false };
         };
 
         const getSocialPreview = async (repository) => {
             const metadataUrl = `https://r.jina.ai/http://github.com/${repository.full_name}`;
-            const response = await fetch(metadataUrl, {
-                headers: { "X-Return-Format": "html" }
-            });
-            if (!response.ok) {
-                throw new Error(`Aperçu social indisponible (${response.status})`);
-            }
+            let lastError;
+            for (let attempt = 0; attempt < 2; attempt += 1) {
+                let response;
+                try {
+                    response = await fetch(metadataUrl, {
+                        headers: { "X-Return-Format": "html" },
+                        cache: "no-store"
+                    });
+                } catch (error) {
+                    lastError = error;
+                    if (attempt === 0) {
+                        await new Promise((resolve) => window.setTimeout(resolve, 500));
+                        continue;
+                    }
+                    break;
+                }
+                if (!response.ok) {
+                    lastError = new Error(`Aperçu social indisponible (${response.status})`);
+                    if (attempt === 0 && (response.status === 403 || response.status === 429 || response.status >= 500)) {
+                        await new Promise((resolve) => window.setTimeout(resolve, 500));
+                        continue;
+                    }
+                    break;
+                }
 
-            const page = new DOMParser().parseFromString(await response.text(), "text/html");
-            const image = page.querySelector('meta[property="og:image"]')?.content;
-            if (!image) {
-                return null;
+                const page = new DOMParser().parseFromString(await response.text(), "text/html");
+                const imageTags = page.querySelectorAll('meta[property="og:image"], meta[property="og:image:secure_url"]');
+                for (const imageTag of imageTags) {
+                    try {
+                        const imageUrl = new URL(imageTag.content, `https://github.com/${repository.full_name}`);
+                        if (
+                            imageUrl.protocol === "https:"
+                            && imageUrl.hostname === "repository-images.githubusercontent.com"
+                        ) {
+                            return imageUrl.href;
+                        }
+                    } catch {
+                        continue;
+                    }
+                }
+                if (attempt === 0) {
+                    await new Promise((resolve) => window.setTimeout(resolve, 500));
+                    continue;
+                }
+                break;
             }
-
-            const imageUrl = new URL(image);
-            if (
-                imageUrl.protocol !== "https:"
-                || !["repository-images.githubusercontent.com", "opengraph.githubassets.com"].includes(imageUrl.hostname)
-            ) {
-                return null;
+            if (lastError) {
+                console.warn(`Impossible de récupérer l’image de preview de ${repository.full_name} :`, lastError);
             }
-            return imageUrl.href;
+            if (knownSocialPreviews[repository.full_name]) {
+                return knownSocialPreviews[repository.full_name];
+            }
+            return null;
         };
 
         const getExcerpt = (markdown) => {
@@ -98,14 +180,12 @@ if (projectSection instanceof HTMLElement) {
 
             const image = document.createElement("img");
             image.className = "github-project-image";
-            image.alt = `Aperçu social du projet ${repository.name}`;
+            image.alt = text.imageAlt(repository.name);
             image.loading = "lazy";
-            const fallbackPreview = `https://opengraph.githubassets.com/1/${repository.full_name}`;
+            const fallbackPreview = `https://opengraph.githubassets.com/${encodeURIComponent(repository.updated_at)}/${repository.full_name}`;
             image.addEventListener("error", () => {
                 if (image.src !== fallbackPreview) {
                     image.src = fallbackPreview;
-                } else if (repository.owner?.avatar_url && image.src !== repository.owner.avatar_url) {
-                    image.src = repository.owner.avatar_url;
                 } else {
                     image.remove();
                 }
@@ -125,7 +205,7 @@ if (projectSection instanceof HTMLElement) {
 
             const date = document.createElement("p");
             date.className = "github-project-date";
-            date.textContent = `Mis à jour le ${new Date(repository.updated_at).toLocaleDateString("fr-FR", {
+            date.textContent = `${text.updatedOn} ${new Date(repository.updated_at).toLocaleDateString(text.dateLocale, {
                 day: "numeric",
                 month: "long",
                 year: "numeric"
@@ -134,8 +214,8 @@ if (projectSection instanceof HTMLElement) {
             const excerpt = document.createElement("p");
             excerpt.className = "github-project-excerpt";
             excerpt.textContent = readme
-                ? getExcerpt(readme) || repository.description || "Aucune description disponible."
-                : repository.description || "Aucun aperçu README disponible.";
+                ? getExcerpt(readme) || repository.description || text.noDescription
+                : repository.description || text.noReadme;
 
             copy.append(title, date, excerpt);
             card.append(image, copy);
@@ -150,7 +230,8 @@ if (projectSection instanceof HTMLElement) {
 
             return {
                 repository,
-                readme: readmeResult.status === "fulfilled" ? readmeResult.value : "",
+                readme: readmeResult.status === "fulfilled" ? readmeResult.value.content : "",
+                localizedReadme: readmeResult.status === "fulfilled" && readmeResult.value.localized,
                 preview: previewResult.status === "fulfilled" ? previewResult.value : null,
                 readmeUnavailable: readmeResult.status === "rejected"
             };
@@ -238,9 +319,23 @@ if (projectSection instanceof HTMLElement) {
             }
         };
 
+        const mapWithConcurrency = async (items, concurrency, mapItem) => {
+            const results = new Array(items.length);
+            let nextIndex = 0;
+            const workers = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+                while (nextIndex < items.length) {
+                    const index = nextIndex;
+                    nextIndex += 1;
+                    results[index] = await mapItem(items[index]);
+                }
+            });
+            await Promise.all(workers);
+            return results;
+        };
+
         const loadProjects = async () => {
             retryButton.hidden = true;
-            status.textContent = "Chargement des projets GitHub…";
+            status.textContent = text.loading;
             track.replaceChildren();
 
             try {
@@ -264,25 +359,31 @@ if (projectSection instanceof HTMLElement) {
                 } while (pageRepositories.length === 100);
 
                 repositories.sort((left, right) => Date.parse(right.updated_at) - Date.parse(left.updated_at));
-                const details = await Promise.all(repositories.map(fetchRepositoryDetails));
+                const details = await mapWithConcurrency(repositories, 2, fetchRepositoryDetails);
                 for (const item of details) {
                     track.append(createCard(item.repository, item.readme, item.preview));
                 }
 
                 if (!details.length) {
-                    status.textContent = "Aucun dépôt public n’a été trouvé pour ce profil.";
+                    status.textContent = text.empty;
                     return;
                 }
 
+                const fallbackReadmes = details.filter((item) => item.readme && !item.localizedReadme).length;
                 const unavailableReadmes = details.filter((item) => item.readmeUnavailable).length;
-                status.textContent = unavailableReadmes
-                    ? `${details.length} projets chargés. Le README de ${unavailableReadmes} dépôt${unavailableReadmes > 1 ? "s" : ""} n’a pas pu être récupéré.`
-                    : `${details.length} projets chargés depuis le profil GitHub WebyPanda.`;
+                const messages = [text.loaded(details.length)];
+                if (fallbackReadmes) {
+                    messages.push(text.fallbackReadmes(fallbackReadmes));
+                }
+                if (unavailableReadmes) {
+                    messages.push(text.unavailableReadmes(unavailableReadmes));
+                }
+                status.textContent = messages.join(" ");
                 updateStatus();
                 startAnimation();
             } catch (error) {
                 console.error("Impossible de charger les projets GitHub :", error);
-                status.textContent = "Impossible de charger les projets GitHub. Vérifie ta connexion puis réessaie.";
+                status.textContent = text.networkError;
                 retryButton.hidden = false;
             }
         };
@@ -446,6 +547,7 @@ if (projectSection instanceof HTMLElement) {
             }
         });
         retryButton.addEventListener("click", loadProjects);
+        retryButton.textContent = text.retry;
 
         loadProjects();
     }

@@ -54,6 +54,11 @@
     cursor: grabbing;
 }
 
+.github-project-scrollbar:focus-visible {
+    outline: 2px solid #7dd3fc;
+    outline-offset: 0.2rem;
+}
+
 .github-project-scrollbar-thumb {
     position: absolute;
     top: 50%;
