@@ -1,5 +1,40 @@
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const themeToggle = document.querySelector(".theme-toggle");
+const themeStorageKey = "portfolio-theme";
+
+if (themeToggle instanceof HTMLButtonElement) {
+    const isEnglish = document.documentElement.lang === "en";
+    try {
+        const savedTheme = window.localStorage.getItem(themeStorageKey);
+        if (savedTheme === "light" || savedTheme === "dark") {
+            document.documentElement.dataset.theme = savedTheme;
+        }
+    } catch (error) {
+        console.warn("Unable to read the saved theme preference:", error);
+    }
+
+    const updateThemeToggle = () => {
+        const isDark = document.documentElement.dataset.theme === "dark";
+        themeToggle.setAttribute("aria-pressed", String(isDark));
+        themeToggle.setAttribute("aria-label", isEnglish
+            ? (isDark ? "Switch to light theme" : "Switch to dark theme")
+            : (isDark ? "Activer le thème clair" : "Activer le thème sombre"));
+    };
+
+    updateThemeToggle();
+    themeToggle.addEventListener("click", () => {
+        const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = nextTheme;
+        updateThemeToggle();
+        try {
+            window.localStorage.setItem(themeStorageKey, nextTheme);
+        } catch (error) {
+            console.warn("Unable to save the theme preference:", error);
+        }
+    });
+}
+
 const binaryBackground = document.querySelector(".binary-background");
 
 if (binaryBackground instanceof HTMLCanvasElement) {
