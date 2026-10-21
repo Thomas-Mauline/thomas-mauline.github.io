@@ -1,7 +1,6 @@
 .github-projects {
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(148, 163, 184, 0.16);
 }
 
 .github-projects > .eyebrow {
@@ -194,10 +193,6 @@
     }
 }
 
-[data-theme="light"] .github-projects {
-    border-top-color: rgba(51, 65, 85, 0.14);
-}
-
 [data-theme="light"] .github-projects h3 {
     color: #0f172a;
 }
@@ -208,19 +203,19 @@
 }
 
 [data-theme="light"] .github-project-card {
-    border-color: rgba(51, 65, 85, 0.14);
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.98));
+    border-color: rgba(51, 65, 85, 0.2);
+    background: linear-gradient(145deg, #dce7f1, #e3ecf5);
     color: #334155;
-    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.09);
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.13);
 }
 
 [data-theme="light"] .github-project-card:hover {
-    border-color: rgba(2, 132, 199, 0.36);
-    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.14), 0 0 20px rgba(56, 189, 248, 0.06);
+    border-color: rgba(2, 132, 199, 0.48);
+    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.18), 0 0 20px rgba(56, 189, 248, 0.1);
 }
 
 [data-theme="light"] .github-project-image {
-    background: #e2e8f0;
+    background: #cad8e6;
 }
 
 [data-theme="light"] .github-project-copy h4 {

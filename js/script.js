@@ -85,6 +85,7 @@ if (binaryBackground instanceof HTMLCanvasElement) {
             context.font = '12px "SFMono-Regular", Consolas, monospace';
             context.textAlign = "center";
             context.textBaseline = "middle";
+            const isLightTheme = document.documentElement.dataset.theme === "light";
 
             for (const glyph of glyphs) {
                 let glow = 0;
@@ -99,20 +100,22 @@ if (binaryBackground instanceof HTMLCanvasElement) {
                         + ripple.roughness * 0.45 * Math.sin(angle * (ripple.lobes + 2) - ripple.phase * 1.7);
                     const distanceFromWave = ripple.radius - distance * shape;
 
-                    if (distanceFromWave >= -12 && distanceFromWave <= 105) {
-                        const front = Math.exp(-(((distanceFromWave - 1) / 16) ** 2));
-                        const trail = distanceFromWave > 0 ? Math.exp(-distanceFromWave / 42) * 0.45 : 0;
+                    if (distanceFromWave >= -24 && distanceFromWave <= 180) {
+                        const front = Math.exp(-(((distanceFromWave - 1) / 26) ** 2));
+                        const trail = distanceFromWave > 0 ? Math.exp(-distanceFromWave / 78) * 0.65 : 0;
                         glow = Math.max(glow, front, trail);
                     }
                 }
 
-                if (glow <= 0.04) {
+                if (glow <= 0.02) {
                     continue;
                 }
 
-                context.fillStyle = `rgba(147, 220, 255, ${0.18 + glow * 0.8})`;
-                context.shadowColor = "rgba(56, 189, 248, 0.9)";
-                context.shadowBlur = glow * 9;
+                context.fillStyle = isLightTheme
+                    ? `rgba(3, 105, 161, ${0.35 + glow * 0.65})`
+                    : `rgba(147, 220, 255, ${0.18 + glow * 0.8})`;
+                context.shadowColor = isLightTheme ? "rgba(2, 132, 199, 0.95)" : "rgba(56, 189, 248, 0.9)";
+                context.shadowBlur = glow * (isLightTheme ? 13 : 9);
                 context.fillText(glyph.value, glyph.x, glyph.y);
             }
 
