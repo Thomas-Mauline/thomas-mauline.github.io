@@ -128,6 +128,15 @@ html {
     min-height: 2.75rem;
 }
 
+.header-controls {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.45rem;
+    margin-left: auto;
+    order: 1;
+}
+
 .logo {
     display: inline-flex;
     align-items: center;
@@ -189,14 +198,16 @@ html {
 }
 
 .nav-window {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     min-width: 0;
+    width: max-content;
     overflow-x: auto;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
     scroll-behavior: smooth;
     mask-image: linear-gradient(90deg, #000 0%, #000 94%, transparent);
     -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 94%, transparent);
+    order: 2;
 }
 
 .nav-window::-webkit-scrollbar {
@@ -1224,7 +1235,16 @@ footer a {
     }
 
     .nav-toggle {
+        margin-left: 0;
+    }
+
+    .header-controls {
         margin-left: auto;
+        order: 0;
+    }
+
+    .nav-window {
+        width: auto;
     }
 
     .nav-toggle {
