@@ -100,9 +100,9 @@ if (binaryBackground instanceof HTMLCanvasElement) {
                         + ripple.roughness * 0.45 * Math.sin(angle * (ripple.lobes + 2) - ripple.phase * 1.7);
                     const distanceFromWave = ripple.radius - distance * shape;
 
-                    if (distanceFromWave >= -24 && distanceFromWave <= 180) {
-                        const front = Math.exp(-(((distanceFromWave - 1) / 26) ** 2));
-                        const trail = distanceFromWave > 0 ? Math.exp(-distanceFromWave / 78) * 0.65 : 0;
+                    if (distanceFromWave >= -12 && distanceFromWave <= 90) {
+                        const front = Math.exp(-(((distanceFromWave - 1) / 13) ** 2));
+                        const trail = distanceFromWave > 0 ? Math.exp(-distanceFromWave / 39) * 0.65 : 0;
                         glow = Math.max(glow, front, trail);
                     }
                 }
