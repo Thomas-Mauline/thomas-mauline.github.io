@@ -40,12 +40,10 @@
             <div class="nav-window" id="primary-navigation">
                 <ul class="nav-links">
                     <li><a href="#welcome" aria-label="Home"><span class="nav-index" aria-hidden="true">01</span><span class="nav-label">Home</span></a></li>
-                    <li><a href="#engineering" aria-label="Engineering background"><span class="nav-index" aria-hidden="true">02</span><span class="nav-label">Education</span></a></li>
-                    <li><a href="#mobility" aria-label="International experience"><span class="nav-index" aria-hidden="true">03</span><span class="nav-label">International</span></a></li>
-                    <li><a href="#civic" aria-label="Community involvement"><span class="nav-index" aria-hidden="true">04</span><span class="nav-label">Involvement</span></a></li>
-                    <li><a href="#sport" aria-label="Sports and interests"><span class="nav-index" aria-hidden="true">05</span><span class="nav-label">Interests</span></a></li>
-                    <li><a href="#career" aria-label="Career goals"><span class="nav-index" aria-hidden="true">06</span><span class="nav-label">Career</span></a></li>
-                    <li><a href="#contact" aria-label="Contact me"><span class="nav-index" aria-hidden="true">07</span><span class="nav-label">Contact</span></a></li>
+                    <li><a href="#projects" aria-label="GitHub projects"><span class="nav-index" aria-hidden="true">02</span><span class="nav-label">Projects</span></a></li>
+                    <li><a href="career-development.html" aria-label="Career development"><span class="nav-index" aria-hidden="true">03</span><span class="nav-label">Career</span></a></li>
+                    <li><a href="activities.html" aria-label="Life beyond the classroom"><span class="nav-index" aria-hidden="true">04</span><span class="nav-label">Activities</span></a></li>
+                    <li><a href="#contact" aria-label="Contact me"><span class="nav-index" aria-hidden="true">05</span><span class="nav-label">Contact</span></a></li>
                 </ul>
             </div>
         </nav>
@@ -65,10 +63,10 @@
                     <span class="hero-chip chip-network">NETWORKS · SYSTEMS</span>
                 </div>
                 <h1>Hello, I’m <span>Thomas Mauline</span></h1>
-                <h2>Digital engineering student at ENSEEIHT, passionate about cybersecurity.</h2>
-                <p>I enjoy understanding systems, analysing problems and turning ideas into practical solutions. Explore my background, experience and interests.</p>
+                <h2>Digital engineering student at ENSEEIHT, passionate about cybersecurity and how computer architectures work.</h2>
+                <p>Curious and hands-on, I am steadily developing my skills through my studies, projects and independent learning. Explore my background, early projects and interests.</p>
                 <div class="cta-buttons">
-                    <a href="../docs/CV_Eng_Thomas_Mauline.pdf" class="btn" target="_blank" rel="noopener">View my CV</a>
+                    <a href="../docs/CV_ENG_Thomas_Mauline.pdf" class="btn" target="_blank" rel="noopener">View my CV</a>
                     <a href="mailto:thomas.mauline@gmail.com" class="btn btn-outline">Get in touch</a>
                     <a href="https://www.linkedin.com/in/thomas-mauline-6829ba294" class="btn btn-outline" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 </div>
@@ -85,40 +83,29 @@
             </div>
         </section>
 
-        <section id="engineering" class="content-section">
-            <p class="eyebrow">Education & experience</p>
-            <h2>Engineering background</h2>
+        <section class="content-section home-paths" aria-labelledby="home-paths-title">
+            <p class="eyebrow">Explore further</p>
+            <h2 id="home-paths-title">Discover my background</h2>
             <div class="card-grid">
-                <article class="info-card">
-                    <h3>Education</h3>
-                    <ul class="timeline">
-                        <li>
-                            <span class="date">Since September 2026</span>
-                            <strong>Digital engineering degree</strong>
-                            <p>INP–ENSEEIHT, Toulouse · first-year core curriculum.</p>
-                        </li>
-                        <li>
-                            <span class="date">2024–2026</span>
-                            <strong>La Prépa des INP</strong>
-                            <p>Toulouse · final cycle with a focus on computer science.</p>
-                        </li>
-                        <li>
-                            <span class="date">2024</span>
-                            <strong>French general baccalaureate, European English section</strong>
-                            <p>Lycée Gaston-Fébus, Orthez · mathematics, physics and computer science · highest honours.</p>
-                        </li>
-                    </ul>
-                </article>
-                <article class="info-card">
-                    <h3>Cybersecurity project</h3>
-                    <p>During a project internship at TORAY CFE, I contributed to the assessment, testing and Active Directory deployment of an enterprise password manager.</p>
-                    <p>I also configured isolated test environments using VLANs and virtual machines, and used Docker and Elastic for deployment and traffic analysis.</p>
-                    <p class="tag-list"><span>Active Directory</span><span>VLANs</span><span>Virtual machines</span><span>Docker</span><span>Elastic</span></p>
-                </article>
+                <a class="info-card home-path-card" href="career-development.html">
+                    <span class="home-path-index" aria-hidden="true">01</span>
+                    <h3>Career development & mobility</h3>
+                    <p>Digital engineering studies, cybersecurity experience and international mobility plans.</p>
+                    <span class="home-path-link">Explore my career plans <span aria-hidden="true">↗</span></span>
+                </a>
+                <a class="info-card home-path-card" href="activities.html">
+                    <span class="home-path-index" aria-hidden="true">02</span>
+                    <h3>Life beyond the classroom</h3>
+                    <p>Sport, music, student life and community involvement.</p>
+                    <span class="home-path-link">Discover my activities <span aria-hidden="true">↗</span></span>
+                </a>
             </div>
+        </section>
+
+        <section id="projects" class="content-section home-projects">
             <section class="github-projects" data-github-projects data-github-user="WebyPanda" aria-labelledby="github-projects-title">
                 <p class="eyebrow">Personal & academic projects</p>
-                <h3 id="github-projects-title">My GitHub projects</h3>
+                <h2 id="github-projects-title">My GitHub projects</h2>
                 <p class="github-projects-intro">Browse my personal and academic projects on GitHub below.</p>
                 <div class="github-project-carousel" data-project-carousel aria-label="GitHub projects carousel">
                     <div class="github-project-track" id="github-project-track" data-project-track aria-live="off"></div>
@@ -129,75 +116,6 @@
                 <p class="github-project-status" data-project-status role="status" aria-live="polite">Loading GitHub projects…</p>
                 <button class="github-project-retry" data-project-retry type="button" hidden>Retry</button>
             </section>
-        </section>
-
-        <section id="mobility" class="content-section">
-            <p class="eyebrow">Languages & openness</p>
-            <h2>International outlook</h2>
-            <div class="card-grid">
-                <article class="info-card">
-                    <h3>English</h3>
-                    <p>I studied in a European English section at high school and earned a C1 English certificate at Kent School of English in Broadstairs.</p>
-                    <p>This experience has strengthened my interest in working with international teams and in globally minded technical environments.</p>
-                </article>
-                <article class="info-card">
-                    <h3>Languages</h3>
-                    <ul class="plain-list">
-                        <li>French</li>
-                        <li>English</li>
-                        <li>Spanish</li>
-                    </ul>
-                    <p class="muted">Language proficiency details are available in my CV.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="civic" class="content-section">
-            <p class="eyebrow">First aid & teamwork</p>
-            <h2>Community involvement</h2>
-            <div class="card-grid">
-                <article class="info-card">
-                    <h3>First aid</h3>
-                    <p>I hold the PSC1 first-aid certificate, awarded by the Bordeaux education authority in April 2024.</p>
-                </article>
-                <article class="info-card">
-                    <h3>Team responsibilities</h3>
-                    <p>As vice-president of the student social events association, I contributed to campus life and helped organise activities.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="sport" class="content-section">
-            <p class="eyebrow">Activities & balance</p>
-            <h2>Sports & interests</h2>
-            <div class="card-grid interests-grid">
-                <article class="info-card">
-                    <h3>Sports</h3>
-                    <p>Eight years of handball, two years of basketball and four years of boxing.</p>
-                </article>
-                <article class="info-card">
-                    <h3>Music</h3>
-                    <p>Nine years of percussion, including with the Orthez municipal band.</p>
-                </article>
-                <article class="info-card">
-                    <h3>Cooking</h3>
-                    <p>Cooking and gastronomy are also among my interests.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="career" class="content-section career-section">
-            <p class="eyebrow">Cybersecurity</p>
-            <h2>Career goals</h2>
-            <div class="career-copy">
-                <p>I want to deepen my cybersecurity skills and contribute to hands-on work: understanding systems, assessing risks and helping implement appropriate solutions.</p>
-                <p>My internship at TORAY CFE gave me my first insight into these challenges. I am keen to continue learning with a specialist team through an internship of at least two months starting 7 June 2027.</p>
-            </div>
-            <div class="cta-buttons">
-                <a href="../docs/CV_Eng_Thomas_Mauline.pdf" class="btn" target="_blank" rel="noopener">Download my CV</a>
-                <a href="mailto:thomas.mauline@gmail.com?subject=Contact%20-%20Thomas%20Mauline" class="btn btn-outline">Send an email</a>
-                <a href="tel:+33767261461" class="btn btn-outline">Call me</a>
-            </div>
         </section>
 
         <section id="contact" class="contact-section" aria-labelledby="contact-title">

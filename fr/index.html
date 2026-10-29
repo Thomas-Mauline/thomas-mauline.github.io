@@ -40,12 +40,10 @@
             <div class="nav-window" id="primary-navigation">
                 <ul class="nav-links">
                     <li><a href="#welcome" aria-label="Accueil"><span class="nav-index" aria-hidden="true">01</span><span class="nav-label">Accueil</span></a></li>
-                    <li><a href="#engineering" aria-label="Parcours ingénieur"><span class="nav-index" aria-hidden="true">02</span><span class="nav-label">Formation</span></a></li>
-                    <li><a href="#mobility" aria-label="Ouverture internationale"><span class="nav-index" aria-hidden="true">03</span><span class="nav-label">International</span></a></li>
-                    <li><a href="#civic" aria-label="Engagement et responsabilité"><span class="nav-index" aria-hidden="true">04</span><span class="nav-label">Engagement</span></a></li>
-                    <li><a href="#sport" aria-label="Sports et centres d’intérêt"><span class="nav-index" aria-hidden="true">05</span><span class="nav-label">Intérêts</span></a></li>
-                    <li><a href="#career" aria-label="Projet professionnel"><span class="nav-index" aria-hidden="true">06</span><span class="nav-label">Projet</span></a></li>
-                    <li><a href="#contact" aria-label="Me contacter"><span class="nav-index" aria-hidden="true">07</span><span class="nav-label">Contact</span></a></li>
+                    <li><a href="#projects" aria-label="Mes projets GitHub"><span class="nav-index" aria-hidden="true">02</span><span class="nav-label">Projets</span></a></li>
+                    <li><a href="career-development.html" aria-label="Projet professionnel"><span class="nav-index" aria-hidden="true">03</span><span class="nav-label">Carrière</span></a></li>
+                    <li><a href="activities.html" aria-label="Vie extrascolaire"><span class="nav-index" aria-hidden="true">04</span><span class="nav-label">Activités</span></a></li>
+                    <li><a href="#contact" aria-label="Me contacter"><span class="nav-index" aria-hidden="true">05</span><span class="nav-label">Contact</span></a></li>
                 </ul>
             </div>
         </nav>
@@ -65,8 +63,8 @@
                     <span class="hero-chip chip-network">RÉSEAUX · SYSTÈMES</span>
                 </div>
                 <h1>Bonjour, je suis <span>Thomas Mauline</span></h1>
-                <h2>Étudiant ingénieur en sciences du numérique à l’ENSEEIHT, passionné par la cybersécurité.</h2>
-                <p>J’aime comprendre les systèmes, analyser les problèmes et transformer les idées en solutions concrètes. Retrouvez ici mon parcours, mes expériences et mes centres d’intérêt.</p>
+                <h2>Étudiant ingénieur en Sciences du Numérique à l'ENSEEIHT, je me passionne pour la cybersécurité et le fonctionnement des architectures informatiques.</h2>
+                <p>Curieux et orienté pratique, je développe progressivement mes compétences à travers mon cursus, mes projets et mon apprentissage en autonomie. Retrouvez ici mon parcours, mes premières réalisations et mes centres d’intérêt.</p>
                 <div class="cta-buttons">
                     <a href="../docs/CV_Thomas_Mauline.pdf" class="btn" target="_blank" rel="noopener">Consulter mon CV</a>
                     <a href="mailto:thomas.mauline@gmail.com" class="btn btn-outline">Me contacter</a>
@@ -85,40 +83,29 @@
             </div>
         </section>
 
-        <section id="engineering" class="content-section">
-            <p class="eyebrow">Formation & expériences</p>
-            <h2>Parcours ingénieur</h2>
+        <section class="content-section home-paths" aria-labelledby="home-paths-title">
+            <p class="eyebrow">Pour aller plus loin</p>
+            <h2 id="home-paths-title">Découvrir mon parcours</h2>
             <div class="card-grid">
-                <article class="info-card">
-                    <h3>Formation</h3>
-                    <ul class="timeline">
-                        <li>
-                            <span class="date">Depuis septembre 2026</span>
-                            <strong>École d’ingénieur en sciences du numérique</strong>
-                            <p>INP–ENSEEIHT, Toulouse · première année, tronc commun.</p>
-                        </li>
-                        <li>
-                            <span class="date">2024–2026</span>
-                            <strong>La Prépa des INP</strong>
-                            <p>Toulouse · parcours de fin de cycle en informatique.</p>
-                        </li>
-                        <li>
-                            <span class="date">2024</span>
-                            <strong>Baccalauréat général, section européenne anglais</strong>
-                            <p>Lycée Gaston-Fébus, Orthez · spécialités mathématiques, physique et informatique · mention Très bien.</p>
-                        </li>
-                    </ul>
-                </article>
-                <article class="info-card">
-                    <h3>Projet en cybersécurité</h3>
-                    <p>Lors d’un stage projet chez TORAY CFE, j’ai participé à l’analyse, aux tests et au déploiement dans Active Directory d’un gestionnaire de mots de passe d’entreprise.</p>
-                    <p>J’ai également configuré des environnements de test isolés par VLAN et machines virtuelles, et utilisé Docker et Elastic pour le déploiement et l’analyse de flux.</p>
-                    <p class="tag-list"><span>Active Directory</span><span>VLAN</span><span>Machines virtuelles</span><span>Docker</span><span>Elastic</span></p>
-                </article>
+                <a class="info-card home-path-card" href="career-development.html">
+                    <span class="home-path-index" aria-hidden="true">01</span>
+                    <h3>Projet professionnel & mobilité</h3>
+                    <p>Formation en sciences du numérique, expérience en cybersécurité et projets de mobilité internationale.</p>
+                    <span class="home-path-link">Explorer mon projet professionnel <span aria-hidden="true">↗</span></span>
+                </a>
+                <a class="info-card home-path-card" href="activities.html">
+                    <span class="home-path-index" aria-hidden="true">02</span>
+                    <h3>Vie extrascolaire & engagement</h3>
+                    <p>Sport, musique, vie associative et engagement citoyen.</p>
+                    <span class="home-path-link">Découvrir mes activités <span aria-hidden="true">↗</span></span>
+                </a>
             </div>
+        </section>
+
+        <section id="projects" class="content-section home-projects">
             <section class="github-projects" data-github-projects data-github-user="WebyPanda" aria-labelledby="github-projects-title">
                 <p class="eyebrow">Projets personnels & académiques</p>
-                <h3 id="github-projects-title">Mes projets GitHub</h3>
+                <h2 id="github-projects-title">Mes projets GitHub</h2>
                 <p class="github-projects-intro">Ci-dessous se trouvent mes projets personnels et académiques sur GitHub.</p>
                 <div class="github-project-carousel" data-project-carousel aria-label="Carrousel des projets GitHub">
                     <div class="github-project-track" id="github-project-track" data-project-track aria-live="off"></div>
@@ -131,79 +118,10 @@
             </section>
         </section>
 
-        <section id="mobility" class="content-section">
-            <p class="eyebrow">Langues & ouverture</p>
-            <h2>Ouverture internationale</h2>
-            <div class="card-grid">
-                <article class="info-card">
-                    <h3>Anglais</h3>
-                    <p>Mon parcours comprend une section européenne anglais au lycée et un certificat d’anglais de niveau C1 obtenu à Kent School of English, à Broadstairs.</p>
-                    <p>Cette formation nourrit mon envie d’évoluer dans des équipes et des environnements techniques ouverts à l’international.</p>
-                </article>
-                <article class="info-card">
-                    <h3>Langues pratiquées</h3>
-                    <ul class="plain-list">
-                        <li>Français</li>
-                        <li>Anglais</li>
-                        <li>Espagnol</li>
-                    </ul>
-                    <p class="muted">Les niveaux détaillés figurent dans mon CV.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="civic" class="content-section">
-            <p class="eyebrow">Prévention & esprit d’équipe</p>
-            <h2>Engagement & responsabilité</h2>
-            <div class="card-grid">
-                <article class="info-card">
-                    <h3>Prévention et premiers secours</h3>
-                    <p>Je suis titulaire du certificat de formation aux premiers secours PSC1, obtenu auprès de l’Académie de Bordeaux en avril 2024.</p>
-                </article>
-                <article class="info-card">
-                    <h3>Responsabilités collectives</h3>
-                    <p>Mon expérience comme vice-président du bureau des extras m’a permis de prendre part à la vie collective et de contribuer à l’organisation d’activités.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="sport" class="content-section">
-            <p class="eyebrow">Activités & équilibre</p>
-            <h2>Sports & centres d’intérêt</h2>
-            <div class="card-grid interests-grid">
-                <article class="info-card">
-                    <h3>Sports</h3>
-                    <p>Handball pratiqué pendant huit ans, basketball pendant deux ans et boxe pendant quatre ans.</p>
-                </article>
-                <article class="info-card">
-                    <h3>Musique</h3>
-                    <p>Pratique des percussions depuis neuf ans, notamment au sein de l’Harmonie municipale d’Orthez.</p>
-                </article>
-                <article class="info-card">
-                    <h3>Cuisine</h3>
-                    <p>La cuisine et la gastronomie font aussi partie de mes centres d’intérêt.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="career" class="content-section career-section">
-            <p class="eyebrow">Cybersécurité</p>
-            <h2>Projet professionnel</h2>
-            <div class="career-copy">
-                <p>Je souhaite approfondir mes compétences en cybersécurité et contribuer à des missions concrètes : comprendre les systèmes, évaluer les risques et participer à la mise en place de solutions adaptées.</p>
-                <p>Mon stage chez TORAY CFE m’a donné un premier aperçu de ces enjeux. Je cherche à poursuivre cet apprentissage au sein d’une équipe spécialisée, dans le cadre d’un stage de deux mois minimum à partir du 7 juin 2027.</p>
-            </div>
-            <div class="cta-buttons">
-                <a href="../docs/CV_Thomas_Mauline.pdf" class="btn" target="_blank" rel="noopener">Télécharger mon CV</a>
-                <a href="mailto:thomas.mauline@gmail.com?subject=Contact%20-%20Thomas%20Mauline" class="btn btn-outline">Écrire un e-mail</a>
-                <a href="tel:+33767261461" class="btn btn-outline">M’appeler</a>
-            </div>
-        </section>
-
         <section id="contact" class="contact-section" aria-labelledby="contact-title">
             <div class="contact-heading">
                 <div>
-                    <p class="eyebrow">Get in touch · Toulouse, France</p>
+                    <p class="eyebrow">Contact · Toulouse, France</p>
                     <h2 id="contact-title">Parlons de la suite <span>ensemble.</span></h2>
                 </div>
                 <p class="contact-heading-note">CYBERSÉCURITÉ<br>RÉSEAUX · SYSTÈMES</p>

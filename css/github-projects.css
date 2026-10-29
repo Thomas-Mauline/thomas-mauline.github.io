@@ -3,10 +3,16 @@
     padding-top: 2rem;
 }
 
+.home-projects .github-projects {
+    margin-top: 0;
+    padding-top: 0;
+}
+
 .github-projects > .eyebrow {
     margin-bottom: 0.35rem;
 }
 
+.github-projects h2,
 .github-projects h3 {
     margin-bottom: 0.5rem;
     color: #f8fafc;
