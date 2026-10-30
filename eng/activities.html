@@ -27,9 +27,9 @@
             <div class="nav-window" id="primary-navigation">
                 <ul class="nav-links">
                     <li><a href="index.html#welcome" aria-label="Home"><span class="nav-index" aria-hidden="true">01</span><span class="nav-label">Home</span></a></li>
-                    <li><a href="index.html#projects" aria-label="GitHub projects"><span class="nav-index" aria-hidden="true">02</span><span class="nav-label">Projects</span></a></li>
-                    <li><a href="career-development.html" aria-label="Career development"><span class="nav-index" aria-hidden="true">03</span><span class="nav-label">Career</span></a></li>
-                    <li><a href="#welcome" aria-label="Life beyond the classroom"><span class="nav-index" aria-hidden="true">04</span><span class="nav-label">Activities</span></a></li>
+                    <li><a href="career-development.html" aria-label="Career development"><span class="nav-index" aria-hidden="true">02</span><span class="nav-label">Career</span></a></li>
+                    <li><a href="#welcome" aria-label="Life beyond the classroom"><span class="nav-index" aria-hidden="true">03</span><span class="nav-label">Activities</span></a></li>
+                    <li><a href="index.html#projects" aria-label="GitHub projects"><span class="nav-index" aria-hidden="true">04</span><span class="nav-label">Projects</span></a></li>
                     <li><a href="index.html#contact" aria-label="Contact me"><span class="nav-index" aria-hidden="true">05</span><span class="nav-label">Contact</span></a></li>
                 </ul>
             </div>
@@ -46,34 +46,44 @@
         <section class="content-section detail-section sport-section">
             <p class="eyebrow">Sport & balance</p>
             <h2>A varied sporting journey</h2>
-            <div class="card-grid activity-grid">
-                <article class="info-card activity-card activity-card-judo">
-                    <span class="activity-kicker">01 · Until CP</span>
+            <p class="timeline-instructions" id="sport-timeline-instructions">Drag the cards to reshape the timeline: the others follow smoothly without overlapping. You can also move them with the arrow keys.</p>
+            <div class="sport-timeline-stage" data-sport-timeline aria-describedby="sport-timeline-instructions">
+                <svg class="sport-timeline-svg" aria-hidden="true" focusable="false">
+                    <defs>
+                        <marker id="sport-timeline-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+                            <path d="M 0 0 L 12 6 L 0 12 z"></path>
+                        </marker>
+                    </defs>
+                    <path class="sport-timeline-line" data-sport-timeline-line></path>
+                    <g class="sport-timeline-ticks" data-sport-timeline-ticks></g>
+                </svg>
+                <article class="info-card activity-card activity-card-judo" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown" data-sport-card data-timeline-period="Until 2011">
+                    <span class="activity-kicker">Until 2011</span>
                     <h3>Judo</h3>
                     <p>Judo introduced me early to perseverance and a fighting spirit.</p>
                 </article>
-                <article class="info-card activity-card activity-card-multisport">
-                    <span class="activity-kicker">02 · Through the end of CE2</span>
+                <article class="info-card activity-card activity-card-multisport" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown" data-sport-card data-timeline-period="2011–2014">
+                    <span class="activity-kicker">2011–2014</span>
                     <h3>Multi-sport</h3>
                     <p>Trying different activities helped me build a broad physical foundation and may have encouraged my adaptability.</p>
                 </article>
-                <article class="info-card activity-card activity-card-handball">
-                    <span class="activity-kicker">03 · 8 years</span>
+                <article class="info-card activity-card activity-card-handball" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown" data-sport-card data-timeline-period="2014–2020">
+                    <span class="activity-kicker">2014–2020</span>
                     <h3>Handball</h3>
                     <p>Eight years learning to work as a team, communicate and commit to a shared goal.</p>
                 </article>
-                <article class="info-card activity-card activity-card-basketball">
-                    <span class="activity-kicker">04 · 2 years</span>
+                <article class="info-card activity-card activity-card-basketball" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown" data-sport-card data-timeline-period="2020–2022">
+                    <span class="activity-kicker">2020–2022</span>
                     <h3>Basketball</h3>
                     <p>Two years discovering another team sport, with its own pace and skills.</p>
                 </article>
-                <article class="info-card activity-card activity-card-football">
-                    <span class="activity-kicker">05 · 1 year</span>
+                <article class="info-card activity-card activity-card-football" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown" data-sport-card data-timeline-period="2022–2023">
+                    <span class="activity-kicker">2022–2023</span>
                     <h3>Football</h3>
                     <p>A year of playing football with friends, simply for the enjoyment of another team sport.</p>
                 </article>
-                <article class="info-card activity-card activity-card-boxe">
-                    <span class="activity-kicker">06 · Today</span>
+                <article class="info-card activity-card activity-card-boxe" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown" data-sport-card data-timeline-period="2023–present">
+                    <span class="activity-kicker">2023–present</span>
                     <h3>Boxing, Muay Thai & MMA</h3>
                     <p>After four years of English boxing, I added Muay Thai and MMA. These individual sports let me challenge myself while staying mindful of my limits.</p>
                 </article>
@@ -83,26 +93,26 @@
         <section class="content-section detail-section">
             <p class="eyebrow">Culture & student life</p>
             <h2>Creating, performing and getting involved</h2>
-            <div class="card-grid activity-grid">
+            <div class="card-grid activity-grid culture-grid">
                 <article class="info-card activity-card activity-card-musique">
-                    <span class="activity-kicker">CM1 → Terminale</span>
+                    <span class="activity-kicker">2014–2024</span>
                     <h3>Percussion</h3>
                     <p>Years of practice exploring percussion, from the resonance of timpani to the precision of playing marimba with four mallets.</p>
                 </article>
                 <article class="info-card activity-card activity-card-harmonie">
-                    <span class="activity-kicker">Orthez municipal band</span>
-                    <h3>Playing in the band</h3>
+                    <span class="activity-kicker">2021–2024</span>
+                    <h3>Orthez municipal band</h3>
                     <p>The culmination of those years: representing the percussion class at commemorations and the summer opening events in Orthez.</p>
                 </article>
                 <article class="info-card activity-card activity-card-vie-etudiante">
-                    <span class="activity-kicker">Student life</span>
+                    <span class="activity-kicker">2024 & 2026</span>
                     <h3>Taking on bigger events</h3>
                     <p>On the student events committee, we regularly organised small activities; our biggest project was a ski weekend planned by ten, without outside help. During the BDE pre-campaign, I was elected secretary of my slate. If we win, I will take on AE and BDE secretary duties as our events grow in scale.</p>
                 </article>
                 <article class="info-card activity-card activity-card-cuisine">
                     <span class="activity-kicker">A hobby</span>
                     <h3>Cooking & gastronomy</h3>
-                    <p>Cooking has long been a passion and even made me consider a different career. I’ve chosen to keep it as a hobby.</p>
+                    <p>Cooking has long been a passion: I enjoy taking time to prepare a meal and exploring new flavours. It even made me consider a different career, but I’ve chosen to keep it as a hobby.</p>
                 </article>
             </div>
         </section>
@@ -110,14 +120,12 @@
         <section class="content-section detail-section">
             <p class="eyebrow">Sustainability & civic engagement</p>
             <h2>Contributing and looking out for others</h2>
-            <div class="card-grid activity-grid">
-                <article class="info-card activity-card activity-card-engagement">
-                    <span class="activity-kicker">Ongoing</span>
+            <div class="card-grid">
+                <article class="info-card">
                     <h3>Community involvement</h3>
                     <p>My degree includes 40 hours of civic engagement. I’ll update this page as I complete activities and track the hours.</p>
                 </article>
-                <article class="info-card activity-card activity-card-psc1">
-                    <span class="activity-kicker">First aid</span>
+                <article class="info-card">
                     <h3>PSC1</h3>
                     <p>I hold the PSC1 first-aid certificate, awarded by the Bordeaux education authority in April 2024.</p>
                 </article>
@@ -135,5 +143,6 @@
     <footer><p>© 2026 Thomas Mauline · Student portfolio</p><p><a href="mailto:thomas.mauline@gmail.com">thomas.mauline@gmail.com</a> · Toulouse</p></footer>
     <div class="cursor-effects" aria-hidden="true"><div class="cursor-solar"><span class="solar-orbit solar-orbit-one"><span class="solar-planet"></span></span><span class="solar-orbit solar-orbit-two"><span class="solar-planet"></span></span><span class="solar-orbit solar-orbit-three"><span class="solar-planet"></span></span><span class="solar-sun"></span></div><span class="comet-tail"></span><span class="comet-tail"></span><span class="comet-tail"></span><span class="cursor-target-frame"></span></div>
     <script src="../js/script.js" defer></script>
+    <script src="../js/sports-timeline.js" defer></script>
 </body>
 </html>

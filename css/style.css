@@ -848,9 +848,59 @@ html {
     padding-bottom: 3.35rem;
 }
 
-.activity-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
+.timeline-instructions {
+    margin: -0.75rem 0 1rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.sport-timeline-stage {
+    position: relative;
+    width: 100vw;
+    height: clamp(40rem, 62vw, 48rem);
+    max-width: none;
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 0;
+    margin-left: calc(50% - 50vw);
+    background: transparent;
+    touch-action: none;
+}
+
+.sport-timeline-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.sport-timeline-line {
+    fill: none;
+    stroke: #38bdf8;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    marker-end: url("#sport-timeline-arrow");
+    filter: drop-shadow(0 0 7px rgba(56, 189, 248, 0.55));
+}
+
+.sport-timeline-svg marker path {
+    fill: #38bdf8;
+}
+
+.sport-timeline-tick {
+    fill: none;
+    stroke: #a5f3fc;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.timeline-instructions {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 76rem;
 }
 
 .activity-card {
@@ -865,6 +915,31 @@ html {
     background-position: center;
     background-size: cover;
     color: #f8fafc;
+}
+
+.sport-timeline-stage .activity-card {
+    position: absolute;
+    z-index: 1;
+    width: clamp(9.5rem, 19vw, 13rem);
+    left: 0;
+    top: 0;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    will-change: left, top, transform;
+    transform: none;
+}
+
+.sport-timeline-stage .activity-card:hover {
+    transform: scale(1.025);
+}
+
+.sport-timeline-stage .activity-card.is-dragging {
+    z-index: 2;
+    cursor: grabbing;
+    box-shadow: 0 24px 55px rgba(2, 8, 23, 0.5), 0 0 0 3px rgba(56, 189, 248, 0.75);
+    transform: scale(1.045) rotate(1deg);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .activity-card::after {
@@ -913,6 +988,40 @@ html {
     text-transform: uppercase;
 }
 
+.sport-timeline-stage .activity-kicker::before {
+    content: "[";
+}
+
+.sport-timeline-stage .activity-kicker::after {
+    content: "]";
+}
+
+.culture-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 18rem));
+    justify-content: center;
+    max-width: 58rem;
+    margin-right: auto;
+    margin-left: auto;
+    gap: 0.85rem;
+}
+
+.culture-grid .activity-card {
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+    padding: 0.9rem;
+}
+
+.culture-grid .activity-card h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1rem;
+}
+
+.culture-grid .activity-card p {
+    font-size: 0.76rem;
+    line-height: 1.35;
+}
+
 .activity-card-judo { --activity-image: url("../img/judo.png"); }
 .activity-card-multisport { --activity-image: url("../img/multisport.png"); }
 .activity-card-handball { --activity-image: url("../img/handball.png"); }
@@ -923,8 +1032,7 @@ html {
 .activity-card-harmonie { --activity-image: url("../img/harmonie.png"); }
 .activity-card-vie-etudiante { --activity-image: url("../img/vie-etudiante.png"); }
 .activity-card-cuisine { --activity-image: url("../img/cuisine.png"); }
-.activity-card-engagement { --activity-image: url("../img/engagement-citoyen.png"); }
-.activity-card-psc1 { --activity-image: url("../img/psc1.png"); }
+
 
 .mobility-carbon h3 {
     margin-bottom: 0.6rem;
@@ -1504,9 +1612,20 @@ footer a {
     }
 
     .card-grid,
-    .interests-grid,
-    .activity-grid {
+    .interests-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sport-timeline-stage {
+        height: 44rem;
+    }
+
+    .sport-timeline-stage .activity-card {
+        width: clamp(9.25rem, 22vw, 12.5rem);
+    }
+
+    .culture-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 18rem));
     }
 
     .contact-section {
@@ -1737,6 +1856,15 @@ footer a {
         padding-bottom: 2.5rem;
     }
 
+    .sport-timeline-stage {
+        height: 102rem;
+    }
+
+    .sport-timeline-stage .activity-card {
+        width: clamp(11.25rem, 65vw, 14.5rem);
+        padding: 1rem;
+    }
+
     .contact-section {
         padding: 3.5rem 7%;
         scroll-margin-top: 5rem;
@@ -1793,8 +1921,13 @@ footer a {
         grid-template-columns: 1fr;
     }
 
-    .activity-grid {
-        grid-template-columns: minmax(0, 1fr);
+    .culture-grid {
+        grid-template-columns: minmax(0, 17rem);
+        justify-content: center;
+    }
+
+    .culture-grid .activity-card {
+        padding: 0.9rem;
     }
 
     .cta-buttons {
@@ -2138,6 +2271,8 @@ footer a {
         linear-gradient(180deg, rgba(5, 12, 24, 0.1) 0%, rgba(5, 12, 24, 0.48) 42%, rgba(5, 12, 24, 0.94) 100%),
         radial-gradient(ellipse at 72% 24%, rgba(56, 189, 248, 0.42), transparent 62%),
         var(--activity-image);
+    background-size: cover, cover, contain;
+    background-repeat: no-repeat;
 }
 
 [data-theme="light"] .activity-card h3,
