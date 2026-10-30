@@ -777,6 +777,36 @@ html {
     color: #cbd5e1;
 }
 
+.career-profiles {
+    display: grid;
+    max-width: 78rem;
+    margin: 0 auto;
+    gap: 1.25rem;
+}
+
+.career-profile h3 {
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+}
+
+.career-profile h4 {
+    margin: 1.4rem 0 0.55rem;
+    color: #7dd3fc;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+}
+
+.career-profile p {
+    max-width: 74rem;
+    line-height: 1.75;
+}
+
+.career-profile u {
+    text-decoration-color: #38bdf8;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.18em;
+}
+
 .career-resource-card {
     display: flex;
     justify-content: space-between;

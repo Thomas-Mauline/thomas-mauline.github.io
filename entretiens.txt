@@ -1,0 +1,79 @@
+Olivier :  
+Parcours :  
+DESS - UTT 
+stage fin d’étude ⇒ RSSI de tout natixis 
+Articulation de l’équipe:  
+Une de 30, la prèmière ligne de def :  
+  S’occupe de def le savoir faire et les screts clients 
+  dispositifs de sécu, antivirus, detction d’intru 
+  capte les signaux faible : detecter une attaque avant qu’elle arrive 
+  soc : rassemeble les log de plus de 20000 collaborateurs 
+Une autre de 30, la deuxième ligne dont il est le chef: 
+  s’occupe du lien info - métier 
+  investigue les alertes de l’equipe 1 
+  repasse derrière les installation de l’equiupe 1 
+  sensibilistation, intégration sécu projet 
+Métier 
+evolue tout le temps, par grossers révolutions (block chain, ia) 
+change chaque jour malrès lourds emplois du temps 
+prioriser (imapct et criticité), planifier pour des patch tout ça 
+Formation continue 
+certifications, conférence 
+secteur: 
+culture de confiance et de sécurité, criticité, mais moyen gros et nécessaire alloués à la 
+cyber pour protéger les systèmes 
+Pr moi: 
+pas de mal à se faire recruter en cyber 
+faire des certif des conf parfois gratuites pour les étudiants 
+séminaires pareil 
+ 
+ 
+Yassair 
+Formation :  
+dut : bcp de réseau 
+license : reseau sécurité 
+ingé : très général info 
+ 
+TLS-Sec (ce que je veux faire) Ingé mastère d’un coup en une année (info à confirmer) 
+ mais le diplome n7 est le même que pour les autres étudiant d’info 
+Certifs :  
+très demandées, financés par les entreprises parfois mais pas la formation avant, 
+renouvellement nécessaire que une fois en entreprise, se fait parfois avec des systèmes de 
+crédits en formation continue. 
+Cyber pr lui (2 composantes) 
+-  Fonctionnelle : GRC : compliance, ISO27001 ... 
+-  Technique : Pleins de sous-composantes 
+-  IAM : accès 
+-  Secu réseaux : ips -ids - nac - routage - ospf 
+-  Applicatif 
+-  Crypto 
+-  SOC : surveillance monitoring 
+1er emploi :  
+Reseau touche à tout, permet de gagner en pleins de compétences, d’être flexible 
+pas taper direct le métier de rêve mais plutôt un métier tremplin sur lequel on peut revenir en 
+arrière pour bouger de sécteur cyber, pas s’enfermer dans un truc niche. 
+Failles IA :  
+php admin web .. 
+fortinet : trouvé par mitos l’ia, patch donné aux partenaire un peu avant d’être dévoilé au 
+public 
+Pk ESN :  
+chgt d’entreprises, tjr de la variabilité, des nouveaux trucs .. 
+-  Consultant indep : avec de l’expériences possible mais: 
+-  pas de garanti de continuité de salaire 
+-  démarchage de clients par nous-même 
+-  mais plus de fric pour moi 
+-  liberté de choix de clients et de projets 
+Reputation :  
+It c’est très petit,k ça se connait entre gens... 
+Journée type  :  
+bcp de réunions : equipes, formation 
+gestion d’incident :  cellule de crise 
+gestion d’obscolescence 
+CTF HACKATHONS 
+echange au maximum c’est le mieux pour connaitre le milieu, se faire des contacts 
+aller au CBC à toulouse le 25-26 novembre 
+Projets perso :  
+Hyper intéresants à publier pour se faire voir 
+PRIORIT2 ABSOLU POUR LA FIN DES ETUDES : SE RENDRE LE 
+PLUS DIFF2RENT POSSIBLE DU RESTE DES MILLIERS 
+D’ETUDIANTS DE TOULOUSE
