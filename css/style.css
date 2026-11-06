@@ -859,19 +859,14 @@ html {
     gap: 1rem;
 }
 
-.thm-profile-mark {
-    display: grid;
+.thm-profile-avatar {
+    display: block;
     width: 3.5rem;
     height: 3.5rem;
     flex: 0 0 auto;
-    place-items: center;
     border: 1px solid rgba(197, 241, 53, 0.55);
     border-radius: 1rem;
-    background: linear-gradient(145deg, #c5f135, #8cae16);
-    color: #17220a;
-    font-size: 0.9rem;
-    font-weight: 900;
-    letter-spacing: 0.05em;
+    object-fit: cover;
 }
 
 .thm-profile-label {
